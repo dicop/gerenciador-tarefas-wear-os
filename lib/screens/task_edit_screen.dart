@@ -501,7 +501,11 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                   Text(
                     AppLocalizations.of(context).confirmDeleteMessage,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 12),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Row(
