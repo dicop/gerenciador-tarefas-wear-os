@@ -37,7 +37,7 @@ class TaskListScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(
-                          task.isCompleted ? Icons.task_alt : Icons.pending_outlined,
+                          task.isCompleted ? Icons.star : Icons.star_border,
                           color: task.isCompleted ? Colors.green : Colors.grey,
                           size: 18,
                         ),
