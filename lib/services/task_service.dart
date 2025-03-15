@@ -22,7 +22,15 @@ class TaskService {
     final existingIndex = tasks.indexWhere((t) => t.id == task.id);
     
     if (existingIndex >= 0) {
-      tasks[existingIndex] = task;
+      final DateTime originalCreatedAt = tasks[existingIndex].createdAt;
+      tasks[existingIndex] = Task(
+        id: task.id,
+        name: task.name,
+        description: task.description,
+        isCompleted: task.isCompleted,
+        alarmDateTime: task.alarmDateTime,
+        createdAt: originalCreatedAt,
+      );
     } else {
       tasks.add(task);
     }

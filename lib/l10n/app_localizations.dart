@@ -495,6 +495,44 @@ class AppLocalizations {
         return 'Clear';
     }
   }
+
+  String get futureDateRequired {
+    switch (locale.languageCode) {
+      case 'pt':
+        return 'A data e hora do alarme deve ser futura';
+      case 'en':
+        return 'Alarm date and time must be in the future';
+      case 'es':
+        return 'La fecha y hora de la alarma debe ser futura';
+      case 'fr':
+        return 'La date et l\'heure de l\'alarme doivent être futures';
+      case 'zh':
+        return '闹钟日期和时间必须是未来的';
+      case 'ja':
+        return 'アラームの日時は未来でなければなりません';
+      default:
+        return 'Alarm date and time must be in the future';
+    }
+  }
+
+  String get taskCompleted {
+    switch (locale.languageCode) {
+      case 'pt':
+        return 'Tarefa concluída';
+      case 'en':
+        return 'Task completed';
+      case 'es':
+        return 'Tarea completada';
+      case 'fr':
+        return 'Tâche terminée';
+      case 'zh':
+        return '任务已完成';
+      case 'ja':
+        return 'タスク完了';
+      default:
+        return 'Task completed';
+    }
+  }
 }
 
 class _AppLocalizationsDelegate

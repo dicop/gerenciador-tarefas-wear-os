@@ -17,6 +17,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
   late final TextEditingController _descriptionController;
   DateTime? _alarmDateTime;
   bool _isEditing = false;
+  bool _isCompleted = false;
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
     _nameController = TextEditingController(text: widget.task?.name ?? '');
     _descriptionController = TextEditingController(text: widget.task?.description ?? '');
     _alarmDateTime = widget.task?.alarmDateTime;
+    _isCompleted = widget.task?.isCompleted ?? false;
   }
 
   @override
@@ -37,112 +39,153 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 40,
-        automaticallyImplyLeading: false,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.save),
-              onPressed: _saveTask,
-              iconSize: 24,
-              color: Colors.green,
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-            ),
-            if (_isEditing)
-              IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: _deleteTask,
-                iconSize: 24,
-                color: Colors.red,
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
-              ),
-          ],
-        ),
-        elevation: 1,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).taskName,
-                border: const OutlineInputBorder(),
-              ),
-              maxLength: 30,
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _descriptionController,
-              decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).taskDescription,
-                border: const OutlineInputBorder(),
-              ),
-              maxLines: 5,
-              maxLength: 1000,
-            ),
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () => _showDateTimePickerDialog(),
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade400),
-                  borderRadius: BorderRadius.circular(4),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 16),
+              TextField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).taskName,
+                  border: const OutlineInputBorder(),
+                  counterText: '',
+                  labelStyle: const TextStyle(fontSize: 12),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  isDense: true,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context).alarmDateTime,
-                            style: const TextStyle(fontSize: 12),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            _alarmDateTime != null
-                                ? _formatDateTime(_alarmDateTime!)
-                                : AppLocalizations.of(context).setAlarm,
-                            style: TextStyle(
-                              color: _alarmDateTime != null
-                                  ? null
-                                  : Colors.grey.shade600,
-                              fontSize: 12,
+                maxLength: 30,
+                style: const TextStyle(fontSize: 12),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: _descriptionController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).taskDescription,
+                  border: const OutlineInputBorder(),
+                  counterText: '',
+                  labelStyle: const TextStyle(fontSize: 12),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  isDense: true,
+                ),
+                maxLines: 3,
+                maxLength: 1000,
+                style: const TextStyle(fontSize: 12),
+              ),
+              const SizedBox(height: 16),
+              InkWell(
+                onTap: () => _showDateTimePickerDialog(),
+                child: InputDecorator(
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    isDense: true,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context).alarmDateTime,
+                              style: const TextStyle(fontSize: 12),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                            const SizedBox(height: 2),
+                            Text(
+                              _alarmDateTime != null
+                                  ? _formatDateTime(_alarmDateTime!)
+                                  : AppLocalizations.of(context).setAlarm,
+                              style: TextStyle(
+                                color: _alarmDateTime != null
+                                    ? null
+                                    : Colors.grey.shade600,
+                                fontSize: 12,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 4),
-                    Icon(
-                      Icons.alarm,
-                      color: Theme.of(context).primaryColor,
-                      size: 20,
-                    ),
-                  ],
+                      const SizedBox(width: 4),
+                      Icon(
+                        Icons.alarm,
+                        color: Theme.of(context).primaryColor,
+                        size: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    AppLocalizations.of(context).taskCompleted,
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  Switch(
+                    value: _isCompleted,
+                    onChanged: (value) {
+                      setState(() {
+                        _isCompleted = value;
+                      });
+                    },
+                    activeColor: Colors.green,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 80), // Espaço para os botões flutuantes
+            ],
+          ),
         ),
       ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FloatingActionButton.small(
+            heroTag: 'saveTask',
+            onPressed: _saveTask,
+            backgroundColor: Colors.green,
+            child: const Icon(Icons.save, size: 18),
+          ),
+          if (_isEditing) ...[
+            FloatingActionButton.small(
+              heroTag: 'deleteTask',
+              onPressed: _deleteTask,
+              backgroundColor: Colors.red,
+              child: const Icon(Icons.delete, size: 18),
+            ),
+          ],
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
   void _showDateTimePickerDialog() {
     final now = DateTime.now();
-    DateTime tempDateTime = _alarmDateTime ?? now;
+    
+    // Se estiver criando uma nova tarefa ou se o alarme foi modificado,
+    // garantir que a data inicial seja futura
+    DateTime tempDateTime;
+    
+    if (_alarmDateTime == null) {
+      // Se não há data definida, usar data atual + 1 hora
+      tempDateTime = now.add(const Duration(hours: 1));
+    } else if (_alarmDateTime!.isBefore(now) && widget.task == null) {
+      // Se é uma nova tarefa e a data é passada, usar data atual + 1 hora
+      tempDateTime = now.add(const Duration(hours: 1));
+    } else {
+      // Caso contrário, usar a data existente
+      tempDateTime = _alarmDateTime!;
+    }
     
     showDialog(
       context: context,
@@ -396,11 +439,33 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
     if (_nameController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context).taskName),
+          content: Center(child: Text(AppLocalizations.of(context).taskName)),
           backgroundColor: Colors.red,
         ),
       );
       return;
+    }
+
+    // Validação da data e hora do alarme
+    if (_alarmDateTime != null) {
+      final now = DateTime.now();
+      
+      // Verificar se é uma nova tarefa ou se o alarme foi alterado
+      final isNewTask = widget.task == null;
+      final alarmWasModified = widget.task != null && 
+          (widget.task!.alarmDateTime == null || 
+           _alarmDateTime!.compareTo(widget.task!.alarmDateTime!) != 0);
+      
+      // Validar apenas se for nova tarefa ou se o alarme foi modificado
+      if ((isNewTask || alarmWasModified) && _alarmDateTime!.isBefore(now)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Center(child: Text(AppLocalizations.of(context).futureDateRequired)),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
     }
 
     final task = Task(
@@ -408,6 +473,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
       name: _nameController.text,
       description: _descriptionController.text,
       alarmDateTime: _alarmDateTime,
+      isCompleted: _isCompleted,
     );
 
     Navigator.pop(context, task);
