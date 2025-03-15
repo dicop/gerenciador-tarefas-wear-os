@@ -170,6 +170,9 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
   }
 
   void _showDateTimePickerDialog() {
+    // Remover o foco de qualquer campo de texto
+    FocusScope.of(context).unfocus();
+    
     final now = DateTime.now();
     
     // Se estiver criando uma nova tarefa ou se o alarme foi modificado,
