@@ -95,12 +95,14 @@ class TaskListScreen extends StatelessWidget {
             FloatingActionButton.small(
               heroTag: 'addTask',
               onPressed: onAddTask,
-              child: const Icon(Icons.add_circle, size: 18),
+              backgroundColor: Colors.blue,
+              child: const Icon(Icons.add_circle, size: 18, color: Colors.white),
             ),
             FloatingActionButton.small(
               heroTag: 'settings',
               onPressed: () => Navigator.pushNamed(context, '/settings'),
-              child: const Icon(Icons.settings, size: 18),
+              backgroundColor: Colors.purple,
+              child: const Icon(Icons.settings, size: 18, color: Colors.white),
             ),
           ],
         ),
