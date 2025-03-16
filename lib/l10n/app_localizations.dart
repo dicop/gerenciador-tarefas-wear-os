@@ -81,19 +81,19 @@ class AppLocalizations {
   String get taskName {
     switch (locale.languageCode) {
       case 'pt':
-        return 'Nome da Tarefa';
+        return 'Nome';
       case 'en':
-        return 'Task Name';
+        return 'Name';
       case 'es':
-        return 'Nombre de la Tarea';
+        return 'Nombre';
       case 'fr':
-        return 'Nom de la Tâche';
+        return 'Nom';
       case 'zh':
-        return '任务名称';
+        return '名称';
       case 'ja':
-        return 'タスク名';
+        return '名前';
       default:
-        return 'Task Name';
+        return 'Name';
     }
   }
 
@@ -119,19 +119,19 @@ class AppLocalizations {
   String get alarmDateTime {
     switch (locale.languageCode) {
       case 'pt':
-        return 'Data/Hora do Alarme';
+        return 'Alarme';
       case 'en':
-        return 'Alarm Date/Time';
+        return 'Alarm';
       case 'es':
-        return 'Fecha/Hora de Alarma';
+        return 'Alarma';
       case 'fr':
-        return 'Date/Heure de l\'Alarme';
+        return 'Alarme';
       case 'zh':
-        return '闹钟日期/时间';
+        return '闹钟';
       case 'ja':
-        return 'アラーム日時';
+        return 'アラーム';
       default:
-        return 'Alarm Date/Time';
+        return 'Alarm';
     }
   }
 
@@ -303,6 +303,44 @@ class AppLocalizations {
         return '設定';
       default:
         return 'Settings';
+    }
+  }
+
+  String get tasks {
+    switch (locale.languageCode) {
+      case 'pt':
+        return 'Tarefas';
+      case 'en':
+        return 'Tasks';
+      case 'es':
+        return 'Tareas';
+      case 'fr':
+        return 'Tâches';
+      case 'zh':
+        return '任务';
+      case 'ja':
+        return 'タスク';
+      default:
+        return 'Tasks';
+    }
+  }
+
+  String get task {
+    switch (locale.languageCode) {
+      case 'pt':
+        return 'Tarefa';
+      case 'en':
+        return 'Task';
+      case 'es':
+        return 'Tarea';
+      case 'fr':
+        return 'Tâche';
+      case 'zh':
+        return '任务';
+      case 'ja':
+        return 'タスク';
+      default:
+        return 'Task';
     }
   }
 
@@ -518,19 +556,19 @@ class AppLocalizations {
   String get taskCompleted {
     switch (locale.languageCode) {
       case 'pt':
-        return 'Tarefa concluída';
+        return 'Concluída';
       case 'en':
-        return 'Task completed';
+        return 'Completed';
       case 'es':
-        return 'Tarea completada';
+        return 'Completada';
       case 'fr':
-        return 'Tâche terminée';
+        return 'Terminée';
       case 'zh':
-        return '任务已完成';
+        return '已完成';
       case 'ja':
-        return 'タスク完了';
+        return '完了';
       default:
-        return 'Task completed';
+        return 'Completed';
     }
   }
 }

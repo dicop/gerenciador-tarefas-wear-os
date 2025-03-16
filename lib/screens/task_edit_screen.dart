@@ -39,18 +39,78 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).brightness == Brightness.dark 
+          ? Colors.black : Colors.grey[100],
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 16),
+              // Title
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey[850]
+                        : Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        _isEditing ? Icons.edit_note : Icons.note_add_outlined,
+                        size: 14,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Theme.of(context).primaryColor,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        AppLocalizations.of(context).task,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black87,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               TextField(
                 controller: _nameController,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context).taskName,
-                  border: const OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[700]! : Colors.grey[300]!,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[700]! : Colors.grey[300]!,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  filled: true,
+                  fillColor: Theme.of(context).brightness == Brightness.dark 
+                      ? Colors.grey[900] : Colors.white,
                   counterText: '',
                   labelStyle: const TextStyle(fontSize: 12),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -64,7 +124,29 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                 controller: _descriptionController,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context).taskDescription,
-                  border: const OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[700]! : Colors.grey[300]!,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[700]! : Colors.grey[300]!,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  filled: true,
+                  fillColor: Theme.of(context).brightness == Brightness.dark 
+                      ? Colors.grey[900] : Colors.white,
                   counterText: '',
                   labelStyle: const TextStyle(fontSize: 12),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -77,9 +159,26 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
               const SizedBox(height: 16),
               InkWell(
                 onTap: () => _showDateTimePickerDialog(),
+                borderRadius: BorderRadius.circular(12),
                 child: InputDecorator(
                   decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).brightness == Brightness.dark 
+                            ? Colors.grey[700]! : Colors.grey[300]!,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).brightness == Brightness.dark 
+                            ? Colors.grey[700]! : Colors.grey[300]!,
+                      ),
+                    ),
+                    filled: true,
+                    fillColor: Theme.of(context).brightness == Brightness.dark 
+                        ? Colors.grey[900] : Colors.white,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     isDense: true,
                   ),
@@ -112,58 +211,101 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                         ),
                       ),
                       const SizedBox(width: 4),
-                      Icon(
-                        Icons.alarm,
-                        color: Theme.of(context).primaryColor,
-                        size: 20,
+                      Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(
+                          Icons.alarm,
+                          color: Theme.of(context).primaryColor,
+                          size: 20,
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppLocalizations.of(context).taskCompleted,
-                    style: const TextStyle(fontSize: 12),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).brightness == Brightness.dark 
+                      ? Colors.grey[900] : Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Theme.of(context).brightness == Brightness.dark 
+                        ? Colors.grey[700]! : Colors.grey[300]!,
                   ),
-                  Switch(
-                    value: _isCompleted,
-                    onChanged: (value) {
-                      setState(() {
-                        _isCompleted = value;
-                      });
-                    },
-                    activeColor: Colors.green,
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).taskCompleted,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    Switch(
+                      value: _isCompleted,
+                      onChanged: (value) {
+                        setState(() {
+                          _isCompleted = value;
+                        });
+                      },
+                      activeColor: Colors.green,
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 80), // Espaço para os botões flutuantes
             ],
           ),
         ),
       ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FloatingActionButton.small(
-            heroTag: 'saveTask',
-            onPressed: _saveTask,
-            backgroundColor: Colors.green,
-            child: const Icon(Icons.save, size: 18),
-          ),
-          if (_isEditing) ...[
-            FloatingActionButton.small(
-              heroTag: 'deleteTask',
-              onPressed: _deleteTask,
-              backgroundColor: Colors.red,
-              child: const Icon(Icons.delete, size: 18),
+      floatingActionButton: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).brightness == Brightness.dark 
+              ? Colors.grey[900] : Colors.white,
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
           ],
-        ],
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton.small(
+              heroTag: 'saveTask',
+              onPressed: _saveTask,
+              backgroundColor: Colors.green,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: const Icon(Icons.save, size: 18),
+            ),
+            if (_isEditing) ...[
+              const SizedBox(width: 8),
+              FloatingActionButton.small(
+                heroTag: 'deleteTask',
+                onPressed: _deleteTask,
+                backgroundColor: Colors.red,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const Icon(Icons.delete, size: 18),
+              ),
+            ],
+          ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
