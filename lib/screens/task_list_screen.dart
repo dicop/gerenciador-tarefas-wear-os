@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import '../models/task.dart';
 import '../l10n/app_localizations.dart';
+import '../screens/settings_screen.dart';
 
 class TaskListScreen extends StatelessWidget {
   final List<Task> tasks;
@@ -252,7 +254,14 @@ class TaskListScreen extends StatelessWidget {
             const SizedBox(width: 8),
             FloatingActionButton.small(
               heroTag: 'settings',
-              onPressed: () => Navigator.pushNamed(context, '/settings'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
+              },
               backgroundColor: Colors.purple,
               elevation: 0,
               shape: RoundedRectangleBorder(

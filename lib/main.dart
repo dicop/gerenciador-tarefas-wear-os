@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -143,7 +144,7 @@ class MyApp extends StatelessWidget {
   Future<void> _addTask(BuildContext context) async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => const TaskEditScreen(),
       ),
     );
@@ -166,7 +167,7 @@ class MyApp extends StatelessWidget {
   Future<void> _editTask(BuildContext context, Task task) async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => TaskEditScreen(task: task),
       ),
     );
