@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 import '../models/task.dart';
 import '../l10n/app_localizations.dart';
@@ -158,6 +157,8 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                     maxLines: 3,
                     maxLength: 1000,
                     style: const TextStyle(fontSize: 12),
+                    keyboardType: TextInputType.multiline,
+                    textInputAction: TextInputAction.done,
                   ),
                   const SizedBox(height: 16),
                   InkWell(

@@ -32,6 +32,5 @@ o aplicativo deve ter uma tela splash screen, para ser apresentada ao abrir o ap
  indicando que tarefa foi excluída com sucesso
  - mensagens de erro de validação, mostrar no topo da tela
  - revisar mensagens de validação
- - o teclado aberto para a descrição, deve ter o enter no lugar da quebra de linha
  - melhorar modal de seleção de data e hora, incluir botão para cancelar,
  deixar de forma mais compacta o aumento/redução dos valores
