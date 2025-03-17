@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 import '../models/task.dart';
 import '../l10n/app_localizations.dart';
@@ -41,228 +42,265 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).brightness == Brightness.dark 
           ? Colors.black : Colors.grey[100],
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Title
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.grey[850]
-                        : Colors.grey[200],
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        _isEditing ? Icons.edit_note : Icons.note_add_outlined,
-                        size: 14,
+      body: Stack(
+        children: [
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Title
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
                         color: Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white
-                            : Theme.of(context).primaryColor,
+                            ? Colors.grey[850]
+                            : Colors.grey[200],
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      const SizedBox(width: 4),
-                      Text(
-                        AppLocalizations.of(context).task,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black87,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              TextField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context).taskName,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).brightness == Brightness.dark 
-                          ? Colors.grey[700]! : Colors.grey[300]!,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).brightness == Brightness.dark 
-                          ? Colors.grey[700]! : Colors.grey[300]!,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                  filled: true,
-                  fillColor: Theme.of(context).brightness == Brightness.dark 
-                      ? Colors.grey[900] : Colors.white,
-                  counterText: '',
-                  labelStyle: const TextStyle(fontSize: 12),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  isDense: true,
-                ),
-                maxLength: 30,
-                style: const TextStyle(fontSize: 12),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: _descriptionController,
-                decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context).taskDescription,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).brightness == Brightness.dark 
-                          ? Colors.grey[700]! : Colors.grey[300]!,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).brightness == Brightness.dark 
-                          ? Colors.grey[700]! : Colors.grey[300]!,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                  filled: true,
-                  fillColor: Theme.of(context).brightness == Brightness.dark 
-                      ? Colors.grey[900] : Colors.white,
-                  counterText: '',
-                  labelStyle: const TextStyle(fontSize: 12),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  isDense: true,
-                ),
-                maxLines: 3,
-                maxLength: 1000,
-                style: const TextStyle(fontSize: 12),
-              ),
-              const SizedBox(height: 16),
-              InkWell(
-                onTap: () => _showDateTimePickerDialog(),
-                borderRadius: BorderRadius.circular(12),
-                child: InputDecorator(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
-                        color: Theme.of(context).brightness == Brightness.dark 
-                            ? Colors.grey[700]! : Colors.grey[300]!,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
-                        color: Theme.of(context).brightness == Brightness.dark 
-                            ? Colors.grey[700]! : Colors.grey[300]!,
-                      ),
-                    ),
-                    filled: true,
-                    fillColor: Theme.of(context).brightness == Brightness.dark 
-                        ? Colors.grey[900] : Colors.white,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    isDense: true,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              AppLocalizations.of(context).alarmDateTime,
-                              style: const TextStyle(fontSize: 12),
-                              overflow: TextOverflow.ellipsis,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            _isEditing ? Icons.edit_note : Icons.note_add_outlined,
+                            size: 14,
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Theme.of(context).primaryColor,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            AppLocalizations.of(context).task,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black87,
                             ),
-                            const SizedBox(height: 2),
-                            Text(
-                              _alarmDateTime != null
-                                  ? _formatDateTime(_alarmDateTime!)
-                                  : AppLocalizations.of(context).setAlarm,
-                              style: TextStyle(
-                                color: _alarmDateTime != null
-                                    ? null
-                                    : Colors.grey.shade600,
-                                fontSize: 12,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  TextField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).taskName,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Theme.of(context).brightness == Brightness.dark 
+                              ? Colors.grey[700]! : Colors.grey[300]!,
                         ),
                       ),
-                      const SizedBox(width: 4),
-                      Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Theme.of(context).brightness == Brightness.dark 
+                              ? Colors.grey[700]! : Colors.grey[300]!,
                         ),
-                        child: Icon(
-                          Icons.alarm,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
                           color: Theme.of(context).primaryColor,
-                          size: 20,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.dark 
-                      ? Colors.grey[900] : Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: Theme.of(context).brightness == Brightness.dark 
-                        ? Colors.grey[700]! : Colors.grey[300]!,
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context).taskCompleted,
-                      style: const TextStyle(fontSize: 12),
+                      filled: true,
+                      fillColor: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[900] : Colors.white,
+                      counterText: '',
+                      labelStyle: const TextStyle(fontSize: 12),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      isDense: true,
                     ),
-                    Switch(
-                      value: _isCompleted,
-                      onChanged: (value) {
-                        setState(() {
-                          _isCompleted = value;
-                        });
-                      },
-                      activeColor: Colors.green,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    maxLength: 30,
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _descriptionController,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).taskDescription,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Theme.of(context).brightness == Brightness.dark 
+                              ? Colors.grey[700]! : Colors.grey[300]!,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Theme.of(context).brightness == Brightness.dark 
+                              ? Colors.grey[700]! : Colors.grey[300]!,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[900] : Colors.white,
+                      counterText: '',
+                      labelStyle: const TextStyle(fontSize: 12),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      isDense: true,
                     ),
-                  ],
-                ),
+                    maxLines: 3,
+                    maxLength: 1000,
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  const SizedBox(height: 16),
+                  InkWell(
+                    onTap: () => _showDateTimePickerDialog(),
+                    borderRadius: BorderRadius.circular(12),
+                    child: InputDecorator(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).brightness == Brightness.dark 
+                                ? Colors.grey[700]! : Colors.grey[300]!,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).brightness == Brightness.dark 
+                                ? Colors.grey[700]! : Colors.grey[300]!,
+                          ),
+                        ),
+                        filled: true,
+                        fillColor: Theme.of(context).brightness == Brightness.dark 
+                            ? Colors.grey[900] : Colors.white,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        isDense: true,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context).alarmDateTime,
+                                  style: const TextStyle(fontSize: 12),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  _alarmDateTime != null
+                                      ? _formatDateTime(_alarmDateTime!)
+                                      : AppLocalizations.of(context).setAlarm,
+                                  style: TextStyle(
+                                    color: _alarmDateTime != null
+                                        ? null
+                                        : Colors.grey.shade600,
+                                    fontSize: 12,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
+                              Icons.alarm,
+                              color: Theme.of(context).primaryColor,
+                              size: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[900] : Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Theme.of(context).brightness == Brightness.dark 
+                            ? Colors.grey[700]! : Colors.grey[300]!,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context).taskCompleted,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        Switch(
+                          value: _isCompleted,
+                          onChanged: (value) {
+                            setState(() {
+                              _isCompleted = value;
+                            });
+                          },
+                          activeColor: Colors.green,
+                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 80), // Espaço para os botões flutuantes
+                ],
               ),
-              const SizedBox(height: 80), // Espaço para os botões flutuantes
-            ],
+            ),
           ),
-        ),
+          // Botão de voltar posicionado no meio do lado esquerdo
+          Positioned(
+            left: 6,
+            top: MediaQuery.of(context).size.height / 2 - 15, // Centraliza verticalmente
+            child: SizedBox(
+              height: 30,
+              width: 30,
+              child: FloatingActionButton(
+                heroTag: 'backBtn',
+                onPressed: () => Navigator.of(context).pop(),
+                backgroundColor: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey[800]
+                    : Colors.white,
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey[700]!
+                        : Colors.grey[300]!,
+                    width: 0,
+                  ),
+                ),
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  size: 18,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black87,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: Container(
         decoration: BoxDecoration(
