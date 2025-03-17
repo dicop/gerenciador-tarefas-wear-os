@@ -207,7 +207,7 @@ class MyApp extends StatelessWidget {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Column(
+        child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(

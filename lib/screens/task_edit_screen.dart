@@ -371,7 +371,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                             },
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: Text('/', style: TextStyle(
                               color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black, 
                               fontSize: 10,
@@ -395,7 +395,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                             },
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: Text('/', style: TextStyle(
                               color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black, 
                               fontSize: 10,
@@ -423,7 +423,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                     }
                   ),
                   
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 12),
                   
                   // Time Picker
                   StatefulBuilder(
@@ -448,7 +448,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                             },
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: Text(':', style: TextStyle(
                               color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black, 
                               fontSize: 10,
@@ -476,7 +476,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                     }
                   ),
                   
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 10),
                   
                   // Buttons
                   Row(
@@ -496,13 +496,13 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                             padding: EdgeInsets.all(4),
                             child: Icon(
                               Icons.delete,
-                              size: 16,
+                              size: 20,
                               color: Colors.red,
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      const SizedBox(width: 25),
                       Material(
                         color: Colors.transparent,
                         child: InkWell(
@@ -517,7 +517,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                             padding: EdgeInsets.all(4),
                             child: Icon(
                               Icons.check,
-                              size: 16,
+                              size: 20,
                               color: Colors.green,
                             ),
                           ),
@@ -552,7 +552,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                 if (newValue > maxValue) newValue = minValue;
                 onChanged(newValue);
               },
-              child: const Icon(Icons.arrow_drop_up, size: 12),
+              child: const Icon(Icons.arrow_drop_up, size: 20),
             ),
             Text(
               initialValue.toString().padLeft(2, '0'),
@@ -568,7 +568,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                 if (newValue < minValue) newValue = maxValue;
                 onChanged(newValue);
               },
-              child: const Icon(Icons.arrow_drop_down, size: 12),
+              child: const Icon(Icons.arrow_drop_down, size: 20),
             ),
           ],
         ),

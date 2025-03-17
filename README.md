@@ -21,3 +21,7 @@ o aplicativo deve ser multi idioma, deve suportar os idiomas: portugues, ingles,
 deve ser possível trocar o tema do aplicativo: claro e escuro
 
 o aplicativo deve ter uma tela splash screen, para ser apresentada ao abrir o aplicativo, nessa tela pode ter uma animação, para deixar o visual mais agradável
+
+
+-- comando para gerar certificado digital
+ keytool -genkey -v -keystore dicop.keystore -alias dicop -keyalg RSA -keysize 2048 -validity 10000

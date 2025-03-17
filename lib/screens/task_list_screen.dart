@@ -23,54 +23,57 @@ class TaskListScreen extends StatelessWidget {
           ? Colors.black : Colors.grey[100],
       body: SafeArea(
         child: tasks.isEmpty 
-            ? Center(
+            ? SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Title for empty state
-                    Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 24),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey[850]
-                              : Colors.grey[200],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.task_alt_outlined,
-                              size: 14,
-                              color: Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.white
-                                  : Theme.of(context).primaryColor,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              AppLocalizations.of(context).tasks,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
+                    // Title at the top
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey[850]
+                                : Colors.grey[200],
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.task_alt_outlined,
+                                size: 14,
                                 color: Theme.of(context).brightness == Brightness.dark
                                     ? Colors.white
-                                    : Colors.black87,
+                                    : Theme.of(context).primaryColor,
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 4),
+                              Text(
+                                AppLocalizations.of(context).tasks,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).brightness == Brightness.dark
+                                      ? Colors.white
+                                      : Colors.black87,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
+                    
                     Icon(
                       Icons.task_outlined,
                       size: 40,
                       color: Theme.of(context).brightness == Brightness.dark 
                           ? Colors.white54 : Colors.black38,
                     ),
-                    const SizedBox(height: 8),
                     Text(
                       'Sem tarefas',
                       style: TextStyle(
@@ -78,6 +81,9 @@ class TaskListScreen extends StatelessWidget {
                         color: Theme.of(context).brightness == Brightness.dark 
                             ? Colors.white54 : Colors.black38,
                       ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.3, // Espaço para permitir rolagem
                     ),
                   ],
                 ),
