@@ -159,6 +159,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                     style: const TextStyle(fontSize: 12),
                     keyboardType: TextInputType.multiline,
                     textInputAction: TextInputAction.done,
+                    onEditingComplete: () => FocusScope.of(context).unfocus(),
                   ),
                   const SizedBox(height: 16),
                   InkWell(
@@ -660,6 +661,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
       isCompleted: _isCompleted,
     );
 
+    // Retornar à tela anterior com a tarefa salva
     Navigator.pop(context, task);
   }
 

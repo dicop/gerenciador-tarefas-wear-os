@@ -84,43 +84,11 @@ class MyApp extends StatelessWidget {
       locale: languageProvider.locale,
       home: Builder(
         builder: (context) {
-          final notificationService = Provider.of<NotificationService>(context, listen: false);
           
-          return Scaffold(
-            body: const SplashScreen(),
+          return const Scaffold(
+            body: SplashScreen(),
             floatingActionButton: Column(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                FloatingActionButton(
-                  heroTag: 'btn1',
-                  onPressed: () {
-                    notificationService.showTestNotification();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Notificação de teste enviada'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                  mini: true,
-                  child: const Icon(Icons.notifications),
-                ),
-                const SizedBox(height: 10),
-                FloatingActionButton(
-                  heroTag: 'btn2',
-                  onPressed: () {
-                    notificationService.scheduleTestAlarm();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Alarme de teste agendado para 10 segundos'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                  mini: true,
-                  child: const Icon(Icons.alarm),
-                ),
-              ],
             ),
           );
         },
@@ -160,6 +128,11 @@ class MyApp extends StatelessWidget {
       
       if (context.mounted) {
         Navigator.pushReplacementNamed(context, '/tasks');
+        
+        // Exibir mensagem de sucesso usando overlay simples em vez de SnackBar
+        Future.delayed(const Duration(milliseconds: 100), () {
+          _showSuccessMessage(context, 'Tarefa salva com sucesso', Colors.green);
+        });
       }
     }
   }
@@ -179,6 +152,15 @@ class MyApp extends StatelessWidget {
       if (result == true) {
         await taskProvider.deleteTask(task.id);
         await notificationService.cancelAlarm(task.id);
+        
+        if (context.mounted) {
+          Navigator.pushReplacementNamed(context, '/tasks');
+          
+          // Exibir mensagem de exclusão
+          Future.delayed(const Duration(milliseconds: 100), () {
+            _showSuccessMessage(context, 'Tarefa excluída com sucesso', Colors.red);
+          });
+        }
       } else if (result is Task) {
         await taskProvider.updateTask(result);
         
@@ -187,10 +169,15 @@ class MyApp extends StatelessWidget {
         } else {
           await notificationService.cancelAlarm(result.id);
         }
-      }
-      
-      if (context.mounted) {
-        Navigator.pushReplacementNamed(context, '/tasks');
+        
+        if (context.mounted) {
+          Navigator.pushReplacementNamed(context, '/tasks');
+          
+          // Exibir mensagem de sucesso
+          Future.delayed(const Duration(milliseconds: 100), () {
+            _showSuccessMessage(context, 'Tarefa salva com sucesso', Colors.green);
+          });
+        }
       }
     }
   }
@@ -284,5 +271,16 @@ class MyApp extends StatelessWidget {
         await notificationService.cancelAlarm(updatedTask.id);
       }
     }
+  }
+
+  // Método para exibir mensagem de sucesso usando SnackBar
+  void _showSuccessMessage(BuildContext context, String message, Color backgroundColor) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Center(child: Text(message)),
+        backgroundColor: backgroundColor,
+        duration: const Duration(seconds: 2),
+      ),
+    );
   }
 }
