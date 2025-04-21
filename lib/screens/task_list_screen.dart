@@ -77,7 +77,7 @@ class TaskListScreen extends StatelessWidget {
                           ? Colors.white54 : Colors.black38,
                     ),
                     Text(
-                      'Sem tarefas',
+                      AppLocalizations.of(context).noTasks,
                       style: TextStyle(
                         fontSize: 14,
                         color: Theme.of(context).brightness == Brightness.dark 

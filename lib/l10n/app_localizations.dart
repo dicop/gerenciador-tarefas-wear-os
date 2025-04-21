@@ -571,6 +571,25 @@ class AppLocalizations {
         return 'Completed';
     }
   }
+
+  String get noTasks {
+    switch (locale.languageCode) {
+      case 'pt':
+        return 'Sem tarefas';
+      case 'en':
+        return 'No tasks';
+      case 'es':
+        return 'Sin tareas';
+      case 'fr':
+        return 'Aucune tâche';
+      case 'zh':
+        return '没有任务';
+      case 'ja':
+        return 'タスクなし';
+      default:
+        return 'No tasks';
+    }
+  }
 }
 
 class _AppLocalizationsDelegate
