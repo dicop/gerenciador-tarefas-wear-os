@@ -80,6 +80,11 @@ class MyApp extends StatelessWidget {
         Locale('fr', ''), // French
         Locale('zh', ''), // Chinese
         Locale('ja', ''), // Japanese
+        Locale('hi', ''), // Hindi
+        Locale('ar', ''), // Arabic
+        Locale('bn', ''), // Bengali
+        Locale('ru', ''), // Russian
+        Locale('pa', ''), // Punjabi
       ],
       locale: languageProvider.locale,
       home: Builder(

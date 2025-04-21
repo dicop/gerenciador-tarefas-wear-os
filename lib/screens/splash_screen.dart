@@ -36,32 +36,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).brightness == Brightness.dark 
+          ? Colors.black : Colors.grey[100],
       body: FutureBuilder(
         future: _initializationFuture,
         builder: (context, snapshot) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.watch,
-                  size: 80,
-                  color: Theme.of(context).primaryColor,
-                )
-                    .animate()
-                    .fadeIn(duration: 1.seconds)
-                    .scale(duration: 1.seconds)
-                    .then()
-                    .shake(duration: 0.5.seconds),
-                const SizedBox(height: 20),
-                Text(
-                  AppLocalizations.of(context).appTitle,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                )
-                    .animate()
-                    .fadeIn(delay: 500.milliseconds, duration: 1.seconds)
-                    .slideY(begin: 0.3, end: 0),
-              ],
+          return Container(
+            color: const Color(0xFF000033),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/dicop.png',
+                    width: double.infinity,
+                    height: 120,
+                  ),
+                ],
+              ),
             ),
           );
         },

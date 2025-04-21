@@ -174,7 +174,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     fontSize: 13,
                                   ),
                                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                                  items: <String>['en', 'pt', 'es', 'fr', 'zh', 'ja']
+                                  items: <String>['en', 'pt', 'es', 'fr', 'zh', 'ja', 'hi', 'ar', 'bn', 'ru', 'pa']
                                       .map<DropdownMenuItem<String>>((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
@@ -284,6 +284,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return '中文';
       case 'ja':
         return '日本語';
+      case 'hi':
+        return 'हिन्दी';
+      case 'ar':
+        return 'العربية';
+      case 'bn':
+        return 'বাংলা';
+      case 'ru':
+        return 'Русский';
+      case 'pa':
+        return 'ਪੰਜਾਬੀ';
       default:
         return 'English';
     }
