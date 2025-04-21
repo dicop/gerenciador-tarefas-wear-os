@@ -420,370 +420,393 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
       context: context,
       builder: (context) => Center(
         child: Container(
-          margin: const EdgeInsets.all(2),
+          margin: EdgeInsets.zero,
           decoration: BoxDecoration(
             color: Theme.of(context).dialogBackgroundColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(2),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Date Picker
-                  StatefulBuilder(
-                    builder: (context, setDialogState) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Decrease button for date
-                          IconButton(
-                            icon: const Icon(Icons.remove, size: 16),
-                            onPressed: () {
-                              setDialogState(() {
-                                switch (selectedDateField) {
-                                  case 'day':
-                                    tempDateTime = DateTime(
-                                      tempDateTime.year,
-                                      tempDateTime.month,
-                                      tempDateTime.day - 1,
-                                      tempDateTime.hour,
-                                      tempDateTime.minute,
-                                    );
-                                    break;
-                                  case 'month':
-                                    tempDateTime = DateTime(
-                                      tempDateTime.year,
-                                      tempDateTime.month - 1,
-                                      tempDateTime.day,
-                                      tempDateTime.hour,
-                                      tempDateTime.minute,
-                                    );
-                                    break;
-                                  case 'year':
-                                    tempDateTime = DateTime(
-                                      tempDateTime.year - 1,
-                                      tempDateTime.month,
-                                      tempDateTime.day,
-                                      tempDateTime.hour,
-                                      tempDateTime.minute,
-                                    );
-                                    break;
-                                }
-                              });
-                            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Date Picker
+                StatefulBuilder(
+                  builder: (context, setDialogState) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Decrease button for date
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(
+                            minWidth: 16,
+                            minHeight: 16,
                           ),
-                          // Date fields
-                          GestureDetector(
-                            onTap: () => setDialogState(() => selectedDateField = 'day'),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: selectedDateField == 'day' 
-                                    ? Theme.of(context).primaryColor.withOpacity(0.1)
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(4),
-                                border: selectedDateField == 'day'
-                                    ? Border.all(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 1,
-                                      )
-                                    : null,
-                              ),
-                              child: Text(
-                                tempDateTime.day.toString().padLeft(2, '0'),
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: selectedDateField == 'day' ? FontWeight.bold : FontWeight.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Text('/', style: TextStyle(
-                            color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
-                            fontSize: 12,
-                            decoration: TextDecoration.none,
-                          )),
-                          GestureDetector(
-                            onTap: () => setDialogState(() => selectedDateField = 'month'),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: selectedDateField == 'month'
-                                    ? Theme.of(context).primaryColor.withOpacity(0.1)
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(4),
-                                border: selectedDateField == 'month'
-                                    ? Border.all(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 1,
-                                      )
-                                    : null,
-                              ),
-                              child: Text(
-                                tempDateTime.month.toString().padLeft(2, '0'),
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: selectedDateField == 'month' ? FontWeight.bold : FontWeight.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Text('/', style: TextStyle(
-                            color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
-                            fontSize: 12,
-                            decoration: TextDecoration.none,
-                          )),
-                          GestureDetector(
-                            onTap: () => setDialogState(() => selectedDateField = 'year'),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: selectedDateField == 'year'
-                                    ? Theme.of(context).primaryColor.withOpacity(0.1)
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(4),
-                                border: selectedDateField == 'year'
-                                    ? Border.all(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 1,
-                                      )
-                                    : null,
-                              ),
-                              child: Text(
-                                tempDateTime.year.toString(),
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: selectedDateField == 'year' ? FontWeight.bold : FontWeight.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                          // Increase button for date
-                          IconButton(
-                            icon: const Icon(Icons.add, size: 16),
-                            onPressed: () {
-                              setDialogState(() {
-                                switch (selectedDateField) {
-                                  case 'day':
-                                    tempDateTime = DateTime(
-                                      tempDateTime.year,
-                                      tempDateTime.month,
-                                      tempDateTime.day + 1,
-                                      tempDateTime.hour,
-                                      tempDateTime.minute,
-                                    );
-                                    break;
-                                  case 'month':
-                                    tempDateTime = DateTime(
-                                      tempDateTime.year,
-                                      tempDateTime.month + 1,
-                                      tempDateTime.day,
-                                      tempDateTime.hour,
-                                      tempDateTime.minute,
-                                    );
-                                    break;
-                                  case 'year':
-                                    tempDateTime = DateTime(
-                                      tempDateTime.year + 1,
-                                      tempDateTime.month,
-                                      tempDateTime.day,
-                                      tempDateTime.hour,
-                                      tempDateTime.minute,
-                                    );
-                                    break;
-                                }
-                              });
-                            },
-                          ),
-                        ],
-                      );
-                    }
-                  ),
-                  
-                  const SizedBox(height: 12),
-                  
-                  // Time Picker
-                  StatefulBuilder(
-                    builder: (context, setDialogState) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Decrease button for time
-                          IconButton(
-                            icon: const Icon(Icons.remove, size: 16),
-                            onPressed: () {
-                              setDialogState(() {
-                                switch (selectedTimeField) {
-                                  case 'hour':
-                                    tempDateTime = DateTime(
-                                      tempDateTime.year,
-                                      tempDateTime.month,
-                                      tempDateTime.day,
-                                      tempDateTime.hour - 1,
-                                      tempDateTime.minute,
-                                    );
-                                    break;
-                                  case 'minute':
-                                    tempDateTime = DateTime(
-                                      tempDateTime.year,
-                                      tempDateTime.month,
-                                      tempDateTime.day,
-                                      tempDateTime.hour,
-                                      tempDateTime.minute - 1,
-                                    );
-                                    break;
-                                }
-                              });
-                            },
-                          ),
-                          // Time fields
-                          GestureDetector(
-                            onTap: () => setDialogState(() => selectedTimeField = 'hour'),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: selectedTimeField == 'hour'
-                                    ? Theme.of(context).primaryColor.withOpacity(0.1)
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(4),
-                                border: selectedTimeField == 'hour'
-                                    ? Border.all(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 1,
-                                      )
-                                    : null,
-                              ),
-                              child: Text(
-                                tempDateTime.hour.toString().padLeft(2, '0'),
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: selectedTimeField == 'hour' ? FontWeight.bold : FontWeight.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Text(':', style: TextStyle(
-                            color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
-                            fontSize: 12,
-                            decoration: TextDecoration.none,
-                          )),
-                          GestureDetector(
-                            onTap: () => setDialogState(() => selectedTimeField = 'minute'),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: selectedTimeField == 'minute'
-                                    ? Theme.of(context).primaryColor.withOpacity(0.1)
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(4),
-                                border: selectedTimeField == 'minute'
-                                    ? Border.all(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 1,
-                                      )
-                                    : null,
-                              ),
-                              child: Text(
-                                tempDateTime.minute.toString().padLeft(2, '0'),
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: selectedTimeField == 'minute' ? FontWeight.bold : FontWeight.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                          // Increase button for time
-                          IconButton(
-                            icon: const Icon(Icons.add, size: 16),
-                            onPressed: () {
-                              setDialogState(() {
-                                switch (selectedTimeField) {
-                                  case 'hour':
-                                    tempDateTime = DateTime(
-                                      tempDateTime.year,
-                                      tempDateTime.month,
-                                      tempDateTime.day,
-                                      tempDateTime.hour + 1,
-                                      tempDateTime.minute,
-                                    );
-                                    break;
-                                  case 'minute':
-                                    tempDateTime = DateTime(
-                                      tempDateTime.year,
-                                      tempDateTime.month,
-                                      tempDateTime.day,
-                                      tempDateTime.hour,
-                                      tempDateTime.minute + 1,
-                                    );
-                                    break;
-                                }
-                              });
-                            },
-                          ),
-                        ],
-                      );
-                    }
-                  ),
-                  
-                  const SizedBox(height: 10),
-                  
-                  // Buttons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              _alarmDateTime = null;
+                          icon: const Icon(Icons.remove, size: 14),
+                          onPressed: () {
+                            setDialogState(() {
+                              switch (selectedDateField) {
+                                case 'day':
+                                  tempDateTime = DateTime(
+                                    tempDateTime.year,
+                                    tempDateTime.month,
+                                    tempDateTime.day - 1,
+                                    tempDateTime.hour,
+                                    tempDateTime.minute,
+                                  );
+                                  break;
+                                case 'month':
+                                  tempDateTime = DateTime(
+                                    tempDateTime.year,
+                                    tempDateTime.month - 1,
+                                    tempDateTime.day,
+                                    tempDateTime.hour,
+                                    tempDateTime.minute,
+                                  );
+                                  break;
+                                case 'year':
+                                  tempDateTime = DateTime(
+                                    tempDateTime.year - 1,
+                                    tempDateTime.month,
+                                    tempDateTime.day,
+                                    tempDateTime.hour,
+                                    tempDateTime.minute,
+                                  );
+                                  break;
+                              }
                             });
-                            Navigator.pop(context);
                           },
-                          borderRadius: BorderRadius.circular(15),
-                          child: const Padding(
-                            padding: EdgeInsets.all(4),
-                            child: Icon(
-                              Icons.delete,
-                              size: 20,
-                              color: Colors.red,
+                        ),
+                        // Date fields
+                        GestureDetector(
+                          onTap: () => setDialogState(() => selectedDateField = 'day'),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: selectedDateField == 'day' 
+                                  ? Theme.of(context).primaryColor.withOpacity(0.1)
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(4),
+                              border: selectedDateField == 'day'
+                                  ? Border.all(
+                                      color: Theme.of(context).brightness == Brightness.dark
+                                          ? Colors.white
+                                          : Theme.of(context).primaryColor,
+                                      width: 1,
+                                    )
+                                  : null,
+                            ),
+                            child: Text(
+                              tempDateTime.day.toString().padLeft(2, '0'),
+                              style: TextStyle(
+                                fontSize: 12,
+                                decoration: TextDecoration.none,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 25),
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              _alarmDateTime = tempDateTime;
-                            });
-                            Navigator.pop(context);
-                          },
-                          borderRadius: BorderRadius.circular(15),
-                          child: const Padding(
-                            padding: EdgeInsets.all(4),
-                            child: Icon(
-                              Icons.check,
-                              size: 20,
-                              color: Colors.green,
+                        Text('/', style: TextStyle(
+                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
+                          fontSize: 12,
+                          decoration: TextDecoration.none,
+                        )),
+                        GestureDetector(
+                          onTap: () => setDialogState(() => selectedDateField = 'month'),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: selectedDateField == 'month'
+                                  ? Theme.of(context).primaryColor.withOpacity(0.1)
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(4),
+                              border: selectedDateField == 'month'
+                                  ? Border.all(
+                                      color: Theme.of(context).brightness == Brightness.dark
+                                          ? Colors.white
+                                          : Theme.of(context).primaryColor,
+                                      width: 1,
+                                    )
+                                  : null,
+                            ),
+                            child: Text(
+                              tempDateTime.month.toString().padLeft(2, '0'),
+                              style: TextStyle(
+                                fontSize: 12,
+                                decoration: TextDecoration.none,
+                              ),
                             ),
                           ),
                         ),
+                        Text('/', style: TextStyle(
+                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
+                          fontSize: 12,
+                          decoration: TextDecoration.none,
+                        )),
+                        GestureDetector(
+                          onTap: () => setDialogState(() => selectedDateField = 'year'),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: selectedDateField == 'year'
+                                  ? Theme.of(context).primaryColor.withOpacity(0.1)
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(4),
+                              border: selectedDateField == 'year'
+                                  ? Border.all(
+                                      color: Theme.of(context).brightness == Brightness.dark
+                                          ? Colors.white
+                                          : Theme.of(context).primaryColor,
+                                      width: 1,
+                                    )
+                                  : null,
+                            ),
+                            child: Text(
+                              tempDateTime.year.toString(),
+                              style: TextStyle(
+                                fontSize: 12,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                        // Increase button for date
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(
+                            minWidth: 16,
+                            minHeight: 16,
+                          ),
+                          icon: const Icon(Icons.add, size: 14),
+                          onPressed: () {
+                            setDialogState(() {
+                              switch (selectedDateField) {
+                                case 'day':
+                                  tempDateTime = DateTime(
+                                    tempDateTime.year,
+                                    tempDateTime.month,
+                                    tempDateTime.day + 1,
+                                    tempDateTime.hour,
+                                    tempDateTime.minute,
+                                  );
+                                  break;
+                                case 'month':
+                                  tempDateTime = DateTime(
+                                    tempDateTime.year,
+                                    tempDateTime.month + 1,
+                                    tempDateTime.day,
+                                    tempDateTime.hour,
+                                    tempDateTime.minute,
+                                  );
+                                  break;
+                                case 'year':
+                                  tempDateTime = DateTime(
+                                    tempDateTime.year + 1,
+                                    tempDateTime.month,
+                                    tempDateTime.day,
+                                    tempDateTime.hour,
+                                    tempDateTime.minute,
+                                  );
+                                  break;
+                              }
+                            });
+                          },
+                        ),
+                      ],
+                    );
+                  }
+                ),
+                
+                const SizedBox(height: 12),
+                
+                // Time Picker
+                StatefulBuilder(
+                  builder: (context, setDialogState) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Decrease button for time
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(
+                            minWidth: 16,
+                            minHeight: 16,
+                          ),
+                          icon: const Icon(Icons.remove, size: 14),
+                          onPressed: () {
+                            setDialogState(() {
+                              switch (selectedTimeField) {
+                                case 'hour':
+                                  tempDateTime = DateTime(
+                                    tempDateTime.year,
+                                    tempDateTime.month,
+                                    tempDateTime.day,
+                                    tempDateTime.hour - 1,
+                                    tempDateTime.minute,
+                                  );
+                                  break;
+                                case 'minute':
+                                  tempDateTime = DateTime(
+                                    tempDateTime.year,
+                                    tempDateTime.month,
+                                    tempDateTime.day,
+                                    tempDateTime.hour,
+                                    tempDateTime.minute - 1,
+                                  );
+                                  break;
+                              }
+                            });
+                          },
+                        ),
+                        // Time fields
+                        GestureDetector(
+                          onTap: () => setDialogState(() => selectedTimeField = 'hour'),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: selectedTimeField == 'hour'
+                                  ? Theme.of(context).primaryColor.withOpacity(0.1)
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(4),
+                              border: selectedTimeField == 'hour'
+                                  ? Border.all(
+                                      color: Theme.of(context).brightness == Brightness.dark
+                                          ? Colors.white
+                                          : Theme.of(context).primaryColor,
+                                      width: 1,
+                                    )
+                                  : null,
+                            ),
+                            child: Text(
+                              tempDateTime.hour.toString().padLeft(2, '0'),
+                              style: TextStyle(
+                                fontSize: 12,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Text(':', style: TextStyle(
+                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
+                          fontSize: 12,
+                          decoration: TextDecoration.none,
+                        )),
+                        GestureDetector(
+                          onTap: () => setDialogState(() => selectedTimeField = 'minute'),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: selectedTimeField == 'minute'
+                                  ? Theme.of(context).primaryColor.withOpacity(0.1)
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(4),
+                              border: selectedTimeField == 'minute'
+                                  ? Border.all(
+                                      color: Theme.of(context).brightness == Brightness.dark
+                                          ? Colors.white
+                                          : Theme.of(context).primaryColor,
+                                      width: 1,
+                                    )
+                                  : null,
+                            ),
+                            child: Text(
+                              tempDateTime.minute.toString().padLeft(2, '0'),
+                              style: TextStyle(
+                                fontSize: 12,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                        // Increase button for time
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(
+                            minWidth: 16,
+                            minHeight: 16,
+                          ),
+                          icon: const Icon(Icons.add, size: 14),
+                          onPressed: () {
+                            setDialogState(() {
+                              switch (selectedTimeField) {
+                                case 'hour':
+                                  tempDateTime = DateTime(
+                                    tempDateTime.year,
+                                    tempDateTime.month,
+                                    tempDateTime.day,
+                                    tempDateTime.hour + 1,
+                                    tempDateTime.minute,
+                                  );
+                                  break;
+                                case 'minute':
+                                  tempDateTime = DateTime(
+                                    tempDateTime.year,
+                                    tempDateTime.month,
+                                    tempDateTime.day,
+                                    tempDateTime.hour,
+                                    tempDateTime.minute + 1,
+                                  );
+                                  break;
+                              }
+                            });
+                          },
+                        ),
+                      ],
+                    );
+                  }
+                ),
+                
+                const SizedBox(height: 10),
+                
+                // Buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            _alarmDateTime = null;
+                          });
+                          Navigator.pop(context);
+                        },
+                        borderRadius: BorderRadius.circular(15),
+                        child: const Padding(
+                          padding: EdgeInsets.all(4),
+                          child: Icon(
+                            Icons.delete,
+                            size: 20,
+                            color: Colors.red,
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    const SizedBox(width: 25),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            _alarmDateTime = tempDateTime;
+                          });
+                          Navigator.pop(context);
+                        },
+                        borderRadius: BorderRadius.circular(15),
+                        child: const Padding(
+                          padding: EdgeInsets.all(4),
+                          child: Icon(
+                            Icons.check,
+                            size: 20,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
