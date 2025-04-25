@@ -209,7 +209,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text(
-                            'Task Manager',
+                            'DICOP TASK',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
@@ -237,8 +237,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             left: 6,
             top: MediaQuery.of(context).size.height / 2 - 15, // Centraliza verticalmente
             child: SizedBox(
-              height: 30,
-              width: 30,
+              height: 35,
+              width: 35,
               child: FloatingActionButton(
                 heroTag: 'backBtn',
                 onPressed: () => Navigator.of(context).pop(),

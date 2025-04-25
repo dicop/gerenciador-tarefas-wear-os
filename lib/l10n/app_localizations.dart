@@ -812,29 +812,29 @@ class AppLocalizations {
   String get futureDateRequired {
     switch (locale.languageCode) {
       case 'pt':
-        return 'A data e hora do alarme deve ser futura';
+        return 'A data do alarme deve ser futura';
       case 'en':
-        return 'Alarm date and time must be in the future';
+        return 'Alarm date must be in the future';
       case 'es':
-        return 'La fecha y hora de la alarma debe ser futura';
+        return 'La fecha de la alarma debe ser futura';
       case 'fr':
-        return 'La date et l\'heure de l\'alarme doivent être futures';
+        return 'La date de l\'alarme doit être future';
       case 'zh':
-        return '闹钟日期和时间必须是未来的';
+        return '闹钟日期必须是未来的';
       case 'ja':
-        return 'アラームの日時は未来でなければなりません';
+        return 'アラームの日付は未来でなければなりません';
       case 'hi':
-        return 'अलार्म की तारीख और समय भविष्य में होना चाहिए';
+        return 'अलार्म की तारीख भविष्य में होनी चाहिए';
       case 'ar':
-        return 'يجب أن يكون تاريخ ووقت المنبه في المستقبل';
+        return 'يجب أن يكون تاريخ المنبه في المستقبل';
       case 'bn':
-        return 'অ্যালার্মের তারিখ এবং সময় ভবিষ্যতে হতে হবে';
+        return 'অ্যালার্মের তারিখ ভবিষ্যতে হতে হবে';
       case 'ru':
-        return 'Дата и время будильника должны быть в будущем';
+        return 'Дата будильника должна быть в будущем';
       case 'pa':
-        return 'ਅਲਾਰਮ ਦੀ ਤਾਰੀਖ ਅਤੇ ਸਮਾਂ ਭਵਿੱਖ ਵਿੱਚ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ';
+        return 'ਅਲਾਰਮ ਦੀ ਤਾਰੀਖ ਭਵਿੱਖ ਵਿੱਚ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ';
       default:
-        return 'Alarm date and time must be in the future';
+        return 'Alarm date must be in the future';
     }
   }
 
@@ -899,58 +899,58 @@ class AppLocalizations {
   String get taskNameRequired {
     switch (locale.languageCode) {
       case 'pt':
-        return 'O nome da tarefa é obrigatório';
+        return 'Campo obrigatório';
       case 'en':
-        return 'Task name is required';
+        return 'Required field';
       case 'es':
-        return 'El nombre de la tarea es obligatorio';
+        return 'Campo obligatorio';
       case 'fr':
-        return 'Le nom de la tâche est obligatoire';
+        return 'Champ obligatoire';
       case 'zh':
-        return '任务名称是必填项';
+        return '必填字段';
       case 'ja':
-        return 'タスク名は必須です';
+        return '必須項目';
       case 'hi':
-        return 'कार्य का नाम आवश्यक है';
+        return 'आवश्यक फ़ील्ड';
       case 'ar':
-        return 'اسم المهمة مطلوب';
+        return 'حقل مطلوب';
       case 'bn':
-        return 'টাস্কের নাম প্রয়োজন';
+        return 'প্রয়োজনীয় ক্ষেত্র';
       case 'ru':
-        return 'Название задачи обязательно';
+        return 'Обязательное поле';
       case 'pa':
-        return 'ਟਾਸਕ ਦਾ ਨਾਮ ਜ਼ਰੂਰੀ ਹੈ';
+        return 'ਲਾਜ਼ਮੀ ਫੀਲਡ';
       default:
-        return 'Task name is required';
+        return 'Required field';
     }
   }
 
   String get taskDescriptionRequired {
     switch (locale.languageCode) {
       case 'pt':
-        return 'A descrição da tarefa é obrigatória';
+        return 'Campo obrigatório';
       case 'en':
-        return 'Task description is required';
+        return 'Required field';
       case 'es':
-        return 'La descripción de la tarea es obligatoria';
+        return 'Campo obligatorio';
       case 'fr':
-        return 'La description de la tâche est obligatoire';
+        return 'Champ obligatoire';
       case 'zh':
-        return '任务描述是必填项';
+        return '必填字段';
       case 'ja':
-        return 'タスクの説明は必須です';
+        return '必須項目';
       case 'hi':
-        return 'कार्य का विवरण आवश्यक है';
+        return 'आवश्यक फ़ील्ड';
       case 'ar':
-        return 'وصف المهمة مطلوب';
+        return 'حقل مطلوب';
       case 'bn':
-        return 'টাস্কের বিবরণ প্রয়োজন';
+        return 'প্রয়োজনীয় ক্ষেত্র';
       case 'ru':
-        return 'Описание задачи обязательно';
+        return 'Обязательное поле';
       case 'pa':
-        return 'ਟਾਸਕ ਦਾ ਵੇਰਵਾ ਜ਼ਰੂਰੀ ਹੈ';
+        return 'ਲਾਜ਼ਮੀ ਫੀਲਡ';
       default:
-        return 'Task description is required';
+        return 'Required field';
     }
   }
 }

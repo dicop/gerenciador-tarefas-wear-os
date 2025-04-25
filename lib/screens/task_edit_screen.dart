@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:relogio_cursor/widgets/alerter.dart';
 import 'package:uuid/uuid.dart';
 import '../models/task.dart';
 import '../l10n/app_localizations.dart';
@@ -25,7 +26,8 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
     super.initState();
     _isEditing = widget.task != null;
     _nameController = TextEditingController(text: widget.task?.name ?? '');
-    _descriptionController = TextEditingController(text: widget.task?.description ?? '');
+    _descriptionController =
+        TextEditingController(text: widget.task?.description ?? '');
     _alarmDateTime = widget.task?.alarmDateTime;
     _isCompleted = widget.task?.isCompleted ?? false;
   }
@@ -40,8 +42,9 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).brightness == Brightness.dark 
-          ? Colors.black : Colors.grey[100],
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.black
+          : Colors.grey[100],
       body: Stack(
         children: [
           SafeArea(
@@ -57,7 +60,8 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                       alignment: Alignment.center,
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 12),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
                           color: Theme.of(context).brightness == Brightness.dark
                               ? Colors.grey[850]
@@ -68,9 +72,12 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
-                              _isEditing ? Icons.edit_note : Icons.note_add_outlined,
+                              _isEditing
+                                  ? Icons.edit_note
+                                  : Icons.note_add_outlined,
                               size: 14,
-                              color: Theme.of(context).brightness == Brightness.dark
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
                                   ? Colors.white
                                   : Theme.of(context).primaryColor,
                             ),
@@ -80,7 +87,8 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
-                                color: Theme.of(context).brightness == Brightness.dark
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
                                     ? Colors.white
                                     : Colors.black87,
                               ),
@@ -102,15 +110,19 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
-                            color: Theme.of(context).brightness == Brightness.dark 
-                                ? Colors.grey[700]! : Colors.grey[300]!,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[700]!
+                                    : Colors.grey[300]!,
                           ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
-                            color: Theme.of(context).brightness == Brightness.dark 
-                                ? Colors.grey[700]! : Colors.grey[300]!,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[700]!
+                                    : Colors.grey[300]!,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -132,11 +144,14 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                           ),
                         ),
                         filled: true,
-                        fillColor: Theme.of(context).brightness == Brightness.dark 
-                            ? Colors.grey[900] : Colors.white,
+                        fillColor:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey[900]
+                                : Colors.white,
                         counterText: '',
                         labelStyle: const TextStyle(fontSize: 12),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
                         isDense: true,
                       ),
                       maxLength: 30,
@@ -147,7 +162,8 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                       controller: _descriptionController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(context).taskDescriptionRequired;
+                          return AppLocalizations.of(context)
+                              .taskDescriptionRequired;
                         }
                         return null;
                       },
@@ -156,15 +172,19 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
-                            color: Theme.of(context).brightness == Brightness.dark 
-                                ? Colors.grey[700]! : Colors.grey[300]!,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[700]!
+                                    : Colors.grey[300]!,
                           ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
-                            color: Theme.of(context).brightness == Brightness.dark 
-                                ? Colors.grey[700]! : Colors.grey[300]!,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[700]!
+                                    : Colors.grey[300]!,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -186,11 +206,14 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                           ),
                         ),
                         filled: true,
-                        fillColor: Theme.of(context).brightness == Brightness.dark 
-                            ? Colors.grey[900] : Colors.white,
+                        fillColor:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey[900]
+                                : Colors.white,
                         counterText: '',
                         labelStyle: const TextStyle(fontSize: 12),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
                         isDense: true,
                       ),
                       maxLines: 3,
@@ -209,21 +232,28 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
-                              color: Theme.of(context).brightness == Brightness.dark 
-                                  ? Colors.grey[700]! : Colors.grey[300]!,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.grey[700]!
+                                  : Colors.grey[300]!,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
-                              color: Theme.of(context).brightness == Brightness.dark 
-                                  ? Colors.grey[700]! : Colors.grey[300]!,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.grey[700]!
+                                  : Colors.grey[300]!,
                             ),
                           ),
                           filled: true,
-                          fillColor: Theme.of(context).brightness == Brightness.dark 
-                              ? Colors.grey[900] : Colors.white,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          fillColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[900]
+                                  : Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 8),
                           isDense: true,
                         ),
                         child: Row(
@@ -258,7 +288,9 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                             Container(
                               padding: const EdgeInsets.all(4),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).primaryColor.withOpacity(0.1),
+                                color: Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Icon(
@@ -273,14 +305,17 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                     ),
                     const SizedBox(height: 16),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.dark 
-                            ? Colors.grey[900] : Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey[900]
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: Theme.of(context).brightness == Brightness.dark 
-                              ? Colors.grey[700]! : Colors.grey[300]!,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.grey[700]!
+                              : Colors.grey[300]!,
                         ),
                       ),
                       child: Row(
@@ -298,12 +333,14 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                               });
                             },
                             activeColor: Colors.green,
-                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 80), // Espaço para os botões flutuantes
+                    const SizedBox(
+                        height: 80), // Espaço para os botões flutuantes
                   ],
                 ),
               ),
@@ -312,10 +349,11 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
           // Botão de voltar posicionado no meio do lado esquerdo
           Positioned(
             left: 6,
-            top: MediaQuery.of(context).size.height / 2 - 15, // Centraliza verticalmente
+            top: MediaQuery.of(context).size.height / 2 -
+                15, // Centraliza verticalmente
             child: SizedBox(
-              height: 30,
-              width: 30,
+              height: 35,
+              width: 35,
               child: FloatingActionButton(
                 heroTag: 'backBtn',
                 onPressed: () => Navigator.of(context).pop(),
@@ -346,8 +384,9 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
       ),
       floatingActionButton: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).brightness == Brightness.dark 
-              ? Colors.grey[900] : Colors.white,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey[900]
+              : Colors.white,
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
             BoxShadow(
@@ -369,7 +408,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: const Icon(Icons.save, size: 18),
+              child: const Icon(Icons.save, size: 18, color: Colors.white,),
             ),
             if (_isEditing) ...[
               const SizedBox(width: 8),
@@ -381,7 +420,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: const Icon(Icons.delete, size: 18),
+                child: const Icon(Icons.delete, size: 18, color: Colors.white,),
               ),
             ],
           ],
@@ -394,13 +433,13 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
   void _showDateTimePickerDialog() {
     // Remover o foco de qualquer campo de texto
     FocusScope.of(context).unfocus();
-    
+
     final now = DateTime.now();
-    
+
     // Se estiver criando uma nova tarefa ou se o alarme foi modificado,
     // garantir que a data inicial seja futura
     DateTime tempDateTime;
-    
+
     if (_alarmDateTime == null) {
       // Se não há data definida, usar data atual + 1 hora
       tempDateTime = now.add(const Duration(hours: 1));
@@ -415,7 +454,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
     // Variáveis para controlar qual campo está selecionado
     String selectedDateField = 'day'; // 'day', 'month', 'year'
     String selectedTimeField = 'hour'; // 'hour', 'minute'
-    
+
     showDialog(
       context: context,
       builder: (context) => Center(
@@ -431,247 +470,287 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Date Picker
-                StatefulBuilder(
-                  builder: (context, setDialogState) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Decrease button for date
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(
-                            minWidth: 16,
-                            minHeight: 16,
-                          ),
-                          icon: const Icon(Icons.remove, size: 14),
-                          onPressed: () {
-                            setDialogState(() {
-                              switch (selectedDateField) {
-                                case 'day':
-                                  tempDateTime = DateTime(
-                                    tempDateTime.year,
-                                    tempDateTime.month,
-                                    tempDateTime.day - 1,
-                                    tempDateTime.hour,
-                                    tempDateTime.minute,
-                                  );
-                                  break;
-                                case 'month':
-                                  tempDateTime = DateTime(
-                                    tempDateTime.year,
-                                    tempDateTime.month - 1,
-                                    tempDateTime.day,
-                                    tempDateTime.hour,
-                                    tempDateTime.minute,
-                                  );
-                                  break;
-                                case 'year':
-                                  tempDateTime = DateTime(
-                                    tempDateTime.year - 1,
-                                    tempDateTime.month,
-                                    tempDateTime.day,
-                                    tempDateTime.hour,
-                                    tempDateTime.minute,
-                                  );
-                                  break;
-                              }
-                            });
-                          },
+                StatefulBuilder(builder: (context, setDialogState) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Decrease button for date
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
                         ),
-                        // Date fields
-                        GestureDetector(
-                          onTap: () => setDialogState(() => selectedDateField = 'day'),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: selectedDateField == 'day' 
-                                  ? Theme.of(context).primaryColor.withOpacity(0.1)
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(4),
-                              border: selectedDateField == 'day'
-                                  ? Border.all(
-                                      color: Theme.of(context).brightness == Brightness.dark
-                                          ? Colors.white
-                                          : Theme.of(context).primaryColor,
-                                      width: 1,
-                                    )
-                                  : null,
-                            ),
-                            child: Text(
-                              tempDateTime.day.toString().padLeft(2, '0'),
-                              style: TextStyle(
-                                fontSize: 12,
-                                decoration: TextDecoration.none,
-                              ),
-                            ),
+                        icon: const Icon(Icons.remove, size: 14),
+                        onPressed: () {
+                          setDialogState(() {
+                            switch (selectedDateField) {
+                              case 'day':
+                                tempDateTime = DateTime(
+                                  tempDateTime.year,
+                                  tempDateTime.month,
+                                  tempDateTime.day - 1,
+                                  tempDateTime.hour,
+                                  tempDateTime.minute,
+                                );
+                                break;
+                              case 'month':
+                                tempDateTime = DateTime(
+                                  tempDateTime.year,
+                                  tempDateTime.month - 1,
+                                  tempDateTime.day,
+                                  tempDateTime.hour,
+                                  tempDateTime.minute,
+                                );
+                                break;
+                              case 'year':
+                                tempDateTime = DateTime(
+                                  tempDateTime.year - 1,
+                                  tempDateTime.month,
+                                  tempDateTime.day,
+                                  tempDateTime.hour,
+                                  tempDateTime.minute,
+                                );
+                                break;
+                            }
+                          });
+                        },
+                      ),
+                      // Date fields
+                      GestureDetector(
+                        onTap: () =>
+                            setDialogState(() => selectedDateField = 'day'),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: selectedDateField == 'day'
+                                ? Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.1)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(4),
+                            border: selectedDateField == 'day'
+                                ? Border.all(
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : Theme.of(context).primaryColor,
+                                    width: 1,
+                                  )
+                                : null,
                           ),
-                        ),
-                        Text('/', style: TextStyle(
-                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
-                          fontSize: 12,
-                          decoration: TextDecoration.none,
-                        )),
-                        GestureDetector(
-                          onTap: () => setDialogState(() => selectedDateField = 'month'),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: selectedDateField == 'month'
-                                  ? Theme.of(context).primaryColor.withOpacity(0.1)
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(4),
-                              border: selectedDateField == 'month'
-                                  ? Border.all(
-                                      color: Theme.of(context).brightness == Brightness.dark
-                                          ? Colors.white
-                                          : Theme.of(context).primaryColor,
-                                      width: 1,
-                                    )
-                                  : null,
-                            ),
-                            child: Text(
-                              tempDateTime.month.toString().padLeft(2, '0'),
-                              style: TextStyle(
-                                fontSize: 12,
-                                decoration: TextDecoration.none,
-                              ),
+                          child: Text(
+                            
+                            tempDateTime.day.toString().padLeft(2, '0'),
+                            style: TextStyle(
+                              fontSize: 12,
+                              decoration: TextDecoration.none,
+                              color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black
                             ),
                           ),
                         ),
-                        Text('/', style: TextStyle(
-                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
-                          fontSize: 12,
-                          decoration: TextDecoration.none,
-                        )),
-                        GestureDetector(
-                          onTap: () => setDialogState(() => selectedDateField = 'year'),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: selectedDateField == 'year'
-                                  ? Theme.of(context).primaryColor.withOpacity(0.1)
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(4),
-                              border: selectedDateField == 'year'
-                                  ? Border.all(
-                                      color: Theme.of(context).brightness == Brightness.dark
-                                          ? Colors.white
-                                          : Theme.of(context).primaryColor,
-                                      width: 1,
-                                    )
-                                  : null,
-                            ),
-                            child: Text(
-                              tempDateTime.year.toString(),
-                              style: TextStyle(
-                                fontSize: 12,
-                                decoration: TextDecoration.none,
-                              ),
+                      ),
+                      Text('/',
+                          style: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                            fontSize: 12,
+                            decoration: TextDecoration.none,
+                          )),
+                      GestureDetector(
+                        onTap: () =>
+                            setDialogState(() => selectedDateField = 'month'),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: selectedDateField == 'month'
+                                ? Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.1)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(4),
+                            border: selectedDateField == 'month'
+                                ? Border.all(
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : Theme.of(context).primaryColor,
+                                    width: 1,
+                                  )
+                                : null,
+                          ),
+                          child: Text(
+                            tempDateTime.month.toString().padLeft(2, '0'),
+                            style: TextStyle(
+                              fontSize: 12,
+                              decoration: TextDecoration.none,
+                              color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black
                             ),
                           ),
                         ),
-                        // Increase button for date
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(
-                            minWidth: 16,
-                            minHeight: 16,
+                      ),
+                      Text('/',
+                          style: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                            fontSize: 12,
+                            decoration: TextDecoration.none,
+                          )),
+                      GestureDetector(
+                        onTap: () =>
+                            setDialogState(() => selectedDateField = 'year'),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: selectedDateField == 'year'
+                                ? Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.1)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(4),
+                            border: selectedDateField == 'year'
+                                ? Border.all(
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : Theme.of(context).primaryColor,
+                                    width: 1,
+                                  )
+                                : null,
                           ),
-                          icon: const Icon(Icons.add, size: 14),
-                          onPressed: () {
-                            setDialogState(() {
-                              switch (selectedDateField) {
-                                case 'day':
-                                  tempDateTime = DateTime(
-                                    tempDateTime.year,
-                                    tempDateTime.month,
-                                    tempDateTime.day + 1,
-                                    tempDateTime.hour,
-                                    tempDateTime.minute,
-                                  );
-                                  break;
-                                case 'month':
-                                  tempDateTime = DateTime(
-                                    tempDateTime.year,
-                                    tempDateTime.month + 1,
-                                    tempDateTime.day,
-                                    tempDateTime.hour,
-                                    tempDateTime.minute,
-                                  );
-                                  break;
-                                case 'year':
-                                  tempDateTime = DateTime(
-                                    tempDateTime.year + 1,
-                                    tempDateTime.month,
-                                    tempDateTime.day,
-                                    tempDateTime.hour,
-                                    tempDateTime.minute,
-                                  );
-                                  break;
-                              }
-                            });
-                          },
+                          child: Text(
+                            tempDateTime.year.toString().substring(2),
+                            style: TextStyle(
+                              fontSize: 12,
+                              decoration: TextDecoration.none,
+                              color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black
+                            ),
+                          ),
                         ),
-                      ],
-                    );
-                  }
-                ),
-                
-                const SizedBox(height: 12),
-                
+                      ),
+                      // Increase button for date
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
+                        ),
+                        icon: const Icon(Icons.add, size: 14),
+                        onPressed: () {
+                          setDialogState(() {
+                            switch (selectedDateField) {
+                              case 'day':
+                                tempDateTime = DateTime(
+                                  tempDateTime.year,
+                                  tempDateTime.month,
+                                  tempDateTime.day + 1,
+                                  tempDateTime.hour,
+                                  tempDateTime.minute,
+                                );
+                                break;
+                              case 'month':
+                                tempDateTime = DateTime(
+                                  tempDateTime.year,
+                                  tempDateTime.month + 1,
+                                  tempDateTime.day,
+                                  tempDateTime.hour,
+                                  tempDateTime.minute,
+                                );
+                                break;
+                              case 'year':
+                                tempDateTime = DateTime(
+                                  tempDateTime.year + 1,
+                                  tempDateTime.month,
+                                  tempDateTime.day,
+                                  tempDateTime.hour,
+                                  tempDateTime.minute,
+                                );
+                                break;
+                            }
+                          });
+                        },
+                      ),
+                    ],
+                  );
+                }),
+
+                const SizedBox(height: 10),
+
                 // Time Picker
-                StatefulBuilder(
-                  builder: (context, setDialogState) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Decrease button for time
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(
-                            minWidth: 16,
-                            minHeight: 16,
-                          ),
-                          icon: const Icon(Icons.remove, size: 14),
-                          onPressed: () {
-                            setDialogState(() {
-                              switch (selectedTimeField) {
-                                case 'hour':
-                                  tempDateTime = DateTime(
-                                    tempDateTime.year,
-                                    tempDateTime.month,
-                                    tempDateTime.day,
-                                    tempDateTime.hour - 1,
-                                    tempDateTime.minute,
-                                  );
-                                  break;
-                                case 'minute':
-                                  tempDateTime = DateTime(
-                                    tempDateTime.year,
-                                    tempDateTime.month,
-                                    tempDateTime.day,
-                                    tempDateTime.hour,
-                                    tempDateTime.minute - 1,
-                                  );
-                                  break;
-                              }
-                            });
-                          },
+                StatefulBuilder(builder: (context, setDialogState) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Decrease button for time
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
                         ),
-                        // Time fields
-                        GestureDetector(
-                          onTap: () => setDialogState(() => selectedTimeField = 'hour'),
+                        icon: const Icon(Icons.remove, size: 14),
+                        onPressed: () {
+                          setDialogState(() {
+                            switch (selectedTimeField) {
+                              case 'hour':
+                                tempDateTime = DateTime(
+                                  tempDateTime.year,
+                                  tempDateTime.month,
+                                  tempDateTime.day,
+                                  tempDateTime.hour - 1,
+                                  tempDateTime.minute,
+                                );
+                                break;
+                              case 'minute':
+                                tempDateTime = DateTime(
+                                  tempDateTime.year,
+                                  tempDateTime.month,
+                                  tempDateTime.day,
+                                  tempDateTime.hour,
+                                  tempDateTime.minute - 1,
+                                );
+                                break;
+                            }
+                          });
+                        },
+                      ),
+                      // Time fields
+                      GestureDetector(
+                        onTap: () =>
+                            setDialogState(() => selectedTimeField = 'hour'),
+                        child: Center(
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
                             decoration: BoxDecoration(
                               color: selectedTimeField == 'hour'
-                                  ? Theme.of(context).primaryColor.withOpacity(0.1)
+                                  ? Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.1)
                                   : Colors.transparent,
                               borderRadius: BorderRadius.circular(4),
                               border: selectedTimeField == 'hour'
                                   ? Border.all(
-                                      color: Theme.of(context).brightness == Brightness.dark
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
                                           ? Colors.white
                                           : Theme.of(context).primaryColor,
                                       width: 1,
@@ -683,82 +762,99 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                               style: TextStyle(
                                 fontSize: 12,
                                 decoration: TextDecoration.none,
+                                color:
+                                  Theme.of(context).brightness == Brightness.dark
+                                      ? Colors.white
+                                      : Colors.black
                               ),
                             ),
                           ),
                         ),
-                        Text(':', style: TextStyle(
-                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
-                          fontSize: 12,
-                          decoration: TextDecoration.none,
-                        )),
-                        GestureDetector(
-                          onTap: () => setDialogState(() => selectedTimeField = 'minute'),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: selectedTimeField == 'minute'
-                                  ? Theme.of(context).primaryColor.withOpacity(0.1)
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(4),
-                              border: selectedTimeField == 'minute'
-                                  ? Border.all(
-                                      color: Theme.of(context).brightness == Brightness.dark
-                                          ? Colors.white
-                                          : Theme.of(context).primaryColor,
-                                      width: 1,
-                                    )
-                                  : null,
-                            ),
-                            child: Text(
-                              tempDateTime.minute.toString().padLeft(2, '0'),
-                              style: TextStyle(
-                                fontSize: 12,
-                                decoration: TextDecoration.none,
-                              ),
+                      ),
+                      Text(':',
+                          style: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                            fontSize: 12,
+                            decoration: TextDecoration.none,
+                          )),
+                      GestureDetector(
+                        onTap: () =>
+                            setDialogState(() => selectedTimeField = 'minute'),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: selectedTimeField == 'minute'
+                                ? Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.1)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(4),
+                            border: selectedTimeField == 'minute'
+                                ? Border.all(
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : Theme.of(context).primaryColor,
+                                    width: 1,
+                                  )
+                                : null,
+                          ),
+                          child: Text(
+                            tempDateTime.minute.toString().padLeft(2, '0'),
+                            style: TextStyle(
+                              fontSize: 12,
+                              decoration: TextDecoration.none,
+                              color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black
                             ),
                           ),
                         ),
-                        // Increase button for time
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(
-                            minWidth: 16,
-                            minHeight: 16,
-                          ),
-                          icon: const Icon(Icons.add, size: 14),
-                          onPressed: () {
-                            setDialogState(() {
-                              switch (selectedTimeField) {
-                                case 'hour':
-                                  tempDateTime = DateTime(
-                                    tempDateTime.year,
-                                    tempDateTime.month,
-                                    tempDateTime.day,
-                                    tempDateTime.hour + 1,
-                                    tempDateTime.minute,
-                                  );
-                                  break;
-                                case 'minute':
-                                  tempDateTime = DateTime(
-                                    tempDateTime.year,
-                                    tempDateTime.month,
-                                    tempDateTime.day,
-                                    tempDateTime.hour,
-                                    tempDateTime.minute + 1,
-                                  );
-                                  break;
-                              }
-                            });
-                          },
+                      ),
+                      // Increase button for time
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
                         ),
-                      ],
-                    );
-                  }
-                ),
-                
+                        icon: const Icon(Icons.add, size: 14),
+                        onPressed: () {
+                          setDialogState(() {
+                            switch (selectedTimeField) {
+                              case 'hour':
+                                tempDateTime = DateTime(
+                                  tempDateTime.year,
+                                  tempDateTime.month,
+                                  tempDateTime.day,
+                                  tempDateTime.hour + 1,
+                                  tempDateTime.minute,
+                                );
+                                break;
+                              case 'minute':
+                                tempDateTime = DateTime(
+                                  tempDateTime.year,
+                                  tempDateTime.month,
+                                  tempDateTime.day,
+                                  tempDateTime.hour,
+                                  tempDateTime.minute + 1,
+                                );
+                                break;
+                            }
+                          });
+                        },
+                      ),
+                    ],
+                  );
+                }),
+
                 const SizedBox(height: 10),
-                
+
                 // Buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -826,20 +922,20 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
     // Validação da data e hora do alarme
     if (_alarmDateTime != null) {
       final now = DateTime.now();
-      
+
       // Verificar se é uma nova tarefa ou se o alarme foi alterado
       final isNewTask = widget.task == null;
-      final alarmWasModified = widget.task != null && 
-          (widget.task!.alarmDateTime == null || 
-           _alarmDateTime!.compareTo(widget.task!.alarmDateTime!) != 0);
-      
+      final alarmWasModified = widget.task != null &&
+          (widget.task!.alarmDateTime == null ||
+              _alarmDateTime!.compareTo(widget.task!.alarmDateTime!) != 0);
+
       // Validar apenas se for nova tarefa ou se o alarme foi modificado
       if ((isNewTask || alarmWasModified) && _alarmDateTime!.isBefore(now)) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Center(child: Text(AppLocalizations.of(context).futureDateRequired)),
-            backgroundColor: Colors.red,
-          ),
+        Alerter.show(
+          context,
+          backgroundColor: Colors.red,
+          message: AppLocalizations.of(context).futureDateRequired,
+          position: OverlayPosition.top,
         );
         return;
       }
@@ -931,4 +1027,4 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
       ),
     );
   }
-} 
+}

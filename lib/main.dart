@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:relogio_cursor/widgets/alerter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/task.dart';
 import 'screens/splash_screen.dart';
@@ -17,7 +18,7 @@ import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   final prefs = await SharedPreferences.getInstance();
   final taskService = TaskService(prefs);
   final notificationService = NotificationService();
@@ -48,9 +49,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = context.watch<ThemeProvider>();
     final languageProvider = context.watch<LanguageProvider>();
-    
+
     return MaterialApp(
-      title: 'Task Manager',
+      title: 'DICOP TASK',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -89,7 +90,6 @@ class MyApp extends StatelessWidget {
       locale: languageProvider.locale,
       home: Builder(
         builder: (context) {
-          
           return const Scaffold(
             body: SplashScreen(),
             floatingActionButton: Column(
@@ -125,18 +125,18 @@ class MyApp extends StatelessWidget {
     if (result != null && result is Task) {
       final taskProvider = context.read<TaskProvider>();
       await taskProvider.addTask(result);
-      
+
       if (result.alarmDateTime != null) {
         final notificationService = context.read<NotificationService>();
         await notificationService.scheduleTaskAlarm(result);
       }
-      
+
       if (context.mounted) {
         Navigator.pushReplacementNamed(context, '/tasks');
-        
-        // Exibir mensagem de sucesso usando overlay simples em vez de SnackBar
+
         Future.delayed(const Duration(milliseconds: 100), () {
-          _showSuccessMessage(context, 'Tarefa salva com sucesso', Colors.green);
+          _showSuccessMessage(
+              context, 'Tarefa salva com sucesso', Colors.green);
         });
       }
     }
@@ -153,34 +153,36 @@ class MyApp extends StatelessWidget {
     if (result != null) {
       final taskProvider = context.read<TaskProvider>();
       final notificationService = context.read<NotificationService>();
-      
+
       if (result == true) {
         await taskProvider.deleteTask(task.id);
         await notificationService.cancelAlarm(task.id);
-        
+
         if (context.mounted) {
           Navigator.pushReplacementNamed(context, '/tasks');
-          
+
           // Exibir mensagem de exclusão
           Future.delayed(const Duration(milliseconds: 100), () {
-            _showSuccessMessage(context, 'Tarefa excluída com sucesso', Colors.red);
+            _showSuccessMessage(
+                context, 'Tarefa excluída com sucesso', Colors.red);
           });
         }
       } else if (result is Task) {
         await taskProvider.updateTask(result);
-        
+
         if (result.alarmDateTime != null) {
           await notificationService.scheduleTaskAlarm(result);
         } else {
           await notificationService.cancelAlarm(result.id);
         }
-        
+
         if (context.mounted) {
           Navigator.pushReplacementNamed(context, '/tasks');
-          
+
           // Exibir mensagem de sucesso
           Future.delayed(const Duration(milliseconds: 100), () {
-            _showSuccessMessage(context, 'Tarefa salva com sucesso', Colors.green);
+            _showSuccessMessage(
+                context, 'Tarefa salva com sucesso', Colors.green);
           });
         }
       }
@@ -200,7 +202,7 @@ class MyApp extends StatelessWidget {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16),
-        child: Column(
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
@@ -269,7 +271,7 @@ class MyApp extends StatelessWidget {
         createdAt: task.createdAt,
       );
       await taskProvider.updateTask(updatedTask);
-      
+
       // Se a tarefa foi marcada como concluída, cancelar o alarme
       if (updatedTask.isCompleted && updatedTask.alarmDateTime != null) {
         final notificationService = context.read<NotificationService>();
@@ -278,14 +280,14 @@ class MyApp extends StatelessWidget {
     }
   }
 
-  // Método para exibir mensagem de sucesso usando SnackBar
-  void _showSuccessMessage(BuildContext context, String message, Color backgroundColor) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Center(child: Text(message)),
-        backgroundColor: backgroundColor,
-        duration: const Duration(seconds: 2),
-      ),
+  void _showSuccessMessage(
+      BuildContext context, String message, Color backgroundColor) {
+    Alerter.show(
+      context,
+      backgroundColor: Colors.blue,
+      textColor: Colors.white,
+      message: message,
+      position: OverlayPosition.top,
     );
   }
 }
